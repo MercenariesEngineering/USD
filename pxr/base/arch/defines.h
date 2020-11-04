@@ -89,7 +89,7 @@
 //
 
 // Only use the GNU STL extensions on Linux when using gcc.
-#if defined(ARCH_OS_LINUX) && defined(ARCH_COMPILER_GCC)
+#if defined(ARCH_OS_LINUX) && (defined(ARCH_COMPILER_GCC) || defined(USD_FORCE_GNU_STL_EXTENSIONS))
 #define ARCH_HAS_GNU_STL_EXTENSIONS
 #endif
 
