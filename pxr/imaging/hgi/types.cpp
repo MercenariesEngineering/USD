@@ -24,6 +24,7 @@
 #include "pxr/pxr.h"
 #include "pxr/imaging/hgi/types.h"
 #include "pxr/base/tf/diagnostic.h"
+#include <algorithm>
 
 #include <algorithm>
 
