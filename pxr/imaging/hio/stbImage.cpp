@@ -51,6 +51,7 @@ ARCH_PRAGMA_MAYBE_UNINITIALIZED
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "pxr/imaging/hio/stb/stb_image_write.h"
 
+#include <algorithm>
 ARCH_PRAGMA_POP
 
 PXR_NAMESPACE_OPEN_SCOPE
@@ -143,7 +144,7 @@ Hio_StbImage::_GetFilenameExtension()
 {
     std::string fileExtension = ArGetResolver().GetExtension(_filename);
     //convert to lowercase
-    transform(fileExtension.begin(), 
+    std::transform(fileExtension.begin(), 
               fileExtension.end(), 
               fileExtension.begin(), ::tolower);
     return fileExtension;
