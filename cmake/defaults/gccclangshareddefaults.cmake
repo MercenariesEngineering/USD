@@ -28,7 +28,8 @@
 include(Options)
 
 # Enable all warnings.
-set(_PXR_GCC_CLANG_SHARED_CXX_FLAGS "${_PXR_GCC_CLANG_SHARED_CXX_FLAGS} -Wall")
+# Note: deactivated as there are far too many warnings
+#set(_PXR_GCC_CLANG_SHARED_CXX_FLAGS "${_PXR_GCC_CLANG_SHARED_CXX_FLAGS} -Wall")
 
 # Errors are warnings in strict build mode.
 if (${PXR_STRICT_BUILD_MODE})

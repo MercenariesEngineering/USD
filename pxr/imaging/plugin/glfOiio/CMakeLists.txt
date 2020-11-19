@@ -14,7 +14,7 @@ pxr_plugin(glfOiio
         gf
         glf
         tf
-        ${OIIO_LIBRARIES}
+        CONAN_PKG::OpenImageIO
         ${OPENEXR_LIBRARIES}
 
     INCLUDE_DIRS

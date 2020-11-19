@@ -14,7 +14,7 @@ pxr_plugin(sdrOsl
         ndr
         sdr
         ${OSL_QUERY_LIBRARY}
-        ${OIIO_LIBRARIES}
+        CONAN_PKG::OpenImageIO
 
     INCLUDE_DIRS
         ${OPENEXR_INCLUDE_DIR}
