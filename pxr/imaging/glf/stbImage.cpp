@@ -46,6 +46,7 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "pxr/imaging/glf/stb/stb_image_write.h"
 
+#include <algorithm>
 PXR_NAMESPACE_OPEN_SCOPE
 
 
@@ -162,7 +163,7 @@ Glf_StbImage::_GetFilenameExtension()
 {
     std::string fileExtension = ArGetResolver().GetExtension(_filename);
     //convert to lowercase
-    transform(fileExtension.begin(), 
+    std::transform(fileExtension.begin(), 
               fileExtension.end(), 
               fileExtension.begin(), ::tolower);
     return fileExtension;
