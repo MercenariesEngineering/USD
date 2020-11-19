@@ -61,7 +61,11 @@ PXR_NAMESPACE_OPEN_SCOPE
 /// \link group_vtdict_functions VtDictionary Functions \endlink group page .
 ///
 class VtDictionary {
+#if defined(__linux__) && defined(__GNUC__) && __GNUC__ < 8 
     typedef std::map<std::string, VtValue, std::less<>> _Map;
+# else 
+    typedef std::map<std::string, VtValue> _Map;
+# endif
     std::unique_ptr<_Map> _dictMap;
 
 public:
