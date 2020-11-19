@@ -29,6 +29,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <algorithm>
 
 PXR_NAMESPACE_OPEN_SCOPE
 

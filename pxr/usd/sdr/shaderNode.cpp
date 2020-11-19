@@ -30,6 +30,7 @@
 
 #include <algorithm>
 #include <unordered_set>
+#include <algorithm>
 
 PXR_NAMESPACE_OPEN_SCOPE
 
