@@ -214,7 +214,7 @@ if(NOT TBB_FOUND)
   if(TBB_VERSION VERSION_LESS 4.3)
     set(TBB_SEARCH_COMPOMPONENTS tbb_preview tbbmalloc tbb)
   else()
-    set(TBB_SEARCH_COMPOMPONENTS tbb_preview tbbmalloc_proxy tbbmalloc tbb)
+    set(TBB_SEARCH_COMPOMPONENTS tbb_preview tbbmalloc tbb)
   endif()
 
   # Find each component
