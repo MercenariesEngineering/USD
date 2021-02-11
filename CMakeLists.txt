@@ -78,8 +78,13 @@ set( PXR_BUILD_PRMAN_PLUGIN off )
 set( PXR_ENABLE_OSL_SUPPORT off )
 
 # options that might change in the future
-set( PXR_ENABLE_PYTHON_SUPPORT on )
-set( PXR_BUILD_USDVIEW on )
+if( UNIX )
+    set( PXR_ENABLE_PYTHON_SUPPORT on )
+    set( PXR_BUILD_USDVIEW on )
+else()
+    set( PXR_ENABLE_PYTHON_SUPPORT off )
+    set( PXR_BUILD_USDVIEW off )
+endif()
 set( PXR_BUILD_TESTS off )
 
 # tweak compile options
