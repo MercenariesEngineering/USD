@@ -14,6 +14,7 @@ endif()
 
 #### This part is added to the original file in order to tweak the build for Rumba ##
 set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
+
 if( DEFINED RUMBA_CONAN_BUILD_INFO_PATH )
     include( "${RUMBA_CONAN_BUILD_INFO_PATH}" )
 else()
