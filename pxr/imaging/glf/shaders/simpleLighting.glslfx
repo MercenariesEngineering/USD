@@ -434,6 +434,7 @@ integrateLightsDefault(vec4 Peye, vec3 Neye, LightingInterfaceProperties props)
             float NdotE = max(0.0, dot(n, e));
             float EdotH = max(0.0, dot(e, h));
             vec3 Reye = reflect(-e, n);
+#ifdef HD_HAS_domeLightIrradiance
 
             LightingContribution indirectLight = evaluateIndirectLight(
                 Neye, Reye, NdotE, EdotH, props, i);
@@ -443,6 +444,7 @@ integrateLightsDefault(vec4 Peye, vec3 Neye, LightingInterfaceProperties props)
             result.specular += indirectLight.specular * light.specular.rgb;
         } else {
             //cosine of incident angle of light
+#endif
             float NdotL = max(0.0, dot(n, l));
             
             //cosine of incident angle from halfway vector between the eye and the light
