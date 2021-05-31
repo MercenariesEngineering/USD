@@ -369,6 +369,7 @@ integrateLightsDefault(vec4 Peye, vec3 Neye, LightingInterfaceProperties props)
             const float roughness = pow( 2.0 / ( props.shininess + 2.0), 0.25 );
             const vec3 fresnel = mix(props.specular, vec3(1.0), simpleLighting_SchlickFresnel( EdotH ) );
 
+#ifdef HD_HAS_domeLightIrradiance
             result.indirect += HdGet_domeLightIrradiance(
                 simpleLighting_projectToLatLong(
                     clamp((transformationMatrix * vec4(Neye, 0.0)).xyz, vec3(-1.0), vec3(1.0))
@@ -382,6 +383,7 @@ integrateLightsDefault(vec4 Peye, vec3 Neye, LightingInterfaceProperties props)
                 ),
                 MAX_REFLECTION_LOD * roughness ).rgb;
             result.indirect += prefilter * fresnel * (brdf.x + brdf.y) * props.specular;
+#endif
         }
         else {
             //cosine of incident angle of lightn
