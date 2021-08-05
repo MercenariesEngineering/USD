@@ -15,8 +15,8 @@ endif()
 #### This part is added to the original file in order to tweak the build for Rumba ##
 set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
 
-if( DEFINED RUMBA_CONAN_BUILD_INFO_PATH )
-    include( "${RUMBA_CONAN_BUILD_INFO_PATH}" )
+if( DEFINED MAQUINA_CONAN_BUILD_INFO_PATH )
+    include( "${MAQUINA_CONAN_BUILD_INFO_PATH}" )
 else()
     include( "${CMAKE_BINARY_DIR}/conanbuildinfo.cmake" )
 endif()
