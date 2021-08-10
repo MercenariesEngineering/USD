@@ -24,16 +24,22 @@ conan_basic_setup(TARGETS)
 
 # help Usd build to use our dependencies
 if( DEFINED HDF5_ROOT )
-# set HDF5_ROOT in the env so FindHDF5.cmake can find it
-message( status "Using HDF5_ROOT: ${HDF5_ROOT}" )
-set( ENV{HDF5_ROOT} ${HDF5_ROOT} )
+    # set HDF5_ROOT in the env so FindHDF5.cmake can find it
+    message( status "Using HDF5_ROOT: ${HDF5_ROOT}" )
+    set( ENV{HDF5_ROOT} ${HDF5_ROOT} )
 endif()
 
-set( Boost_PROGRAM_OPTIONS_FOUND on )
 if( UNIX )
-    set( Boost_PROGRAM_OPTIONS_LIBRARY "${CONAN_LIB_DIRS_BOOST}/libboost_program_options.so" )
-    set( Boost_PYTHON37_LIBRARY "${CONAN_LIB_DIRS_BOOST}/libboost_python37.so" )
-    set( OIIO_LOCATION "${CONAN_LIB_DIRS_OPENIMAGEIO}" )
+    if (NOT DEFINED Boost_PROGRAM_OPTIONS_FOUND)
+        set( Boost_PROGRAM_OPTIONS_FOUND on )
+        set( Boost_PROGRAM_OPTIONS_LIBRARY "${CONAN_LIB_DIRS_BOOST}/libboost_program_options.so" )
+        set( Boost_PYTHON37_LIBRARY "${CONAN_LIB_DIRS_BOOST}/libboost_python37.so" )
+    endif ()
+    
+    if (NOT DEFINED OIIO_LOCATION)
+        set( OIIO_LOCATION "${CONAN_OPENIMAGEIO_ROOT}" )
+    endif ()
+
     set( OPENGL_gl_LIBRARY "${CONAN_LIB_DIRS_GLU}/libGLU.a" )
     include_directories( "${CONAN_INCLUDE_DIRS_GLU}" )
 else()
@@ -46,51 +52,23 @@ else()
     if( NOT DEFINED CONAN_DEFINES )
         set( CONAN_DEFINES ${CONAN_DEFINES_RELEASE} )
     endif()
-    set( Boost_PROGRAM_OPTIONS_FOUND on )
-    set( Boost_PROGRAM_OPTIONS_LIBRARY "${CONAN_LIB_DIRS_BOOST}/boost_program_options.lib" )
-    set( Boost_PYTHON37_LIBRARY "${CONAN_LIB_DIRS_BOOST}/boost_python37.lib" )
+
+    if( NOT DEFINED Boost_PROGRAM_OPTIONS_FOUND )
+        set( Boost_PROGRAM_OPTIONS_FOUND on )
+        set( Boost_PROGRAM_OPTIONS_LIBRARY "${CONAN_LIB_DIRS_BOOST}/boost_program_options.lib" )
+        set( Boost_PYTHON37_LIBRARY "${CONAN_LIB_DIRS_BOOST}/boost_python37.lib" )
+    endif ()
+
+    if (NOT DEFINED OIIO_LOCATION)
+        set( OIIO_LOCATION "${CONAN_OPENIMAGEIO_ROOT_RELEASE}" )
+    endif ()
+
     set( GLEW_LIBRARY "${CONAN_LIB_DIRS_GLEW}/glew32.lib" )
-    add_definitions(${CONAN_DEFINES})
 endif()
-
-set( HDF5_USE_STATIC_LIBRARIES on )
-set( Boost_USE_STATIC_LIBS on )
-
-# activate the options we need for Rumba
-set( PXR_BUILD_OPENCOLORIO_PLUGIN on )
-set( PXR_BUILD_OPENIMAGEIO_PLUGIN on )
-set( PXR_BUILD_MATERIALX_PLUGIN on )
-set( PXR_BUILD_ALEMBIC_PLUGIN on )
-set( PXR_ENABLE_HDF5_SUPPORT on )
-set( PXR_ENABLE_PTEX_SUPPORT on )
-set( PXR_BUILD_USD_IMAGING on )
-set( PXR_ENABLE_GL_SUPPORT on )
-set( PXR_BUILD_IMAGING on )
-set( PXR_USE_PYTHON_3 on )
-
-# deactivate unused components / features
-set( PXR_ENABLE_OPENVDB_SUPPORT off )
-set( PXR_BUILD_HOUDINI_PLUGIN off )
-set( PXR_BUILD_EMBREE_PLUGIN off )
-set( PXR_BUILD_DOCUMENTATION off )
-set( PXR_BUILD_KATANA_PLUGIN off )
-set( PXR_BUILD_DRACO_PLUGIN off )
-set( PXR_BUILD_PRMAN_PLUGIN off )
-set( PXR_ENABLE_OSL_SUPPORT off )
-
-# options that might change in the future
-if( UNIX )
-    set( PXR_ENABLE_PYTHON_SUPPORT on )
-    set( PXR_BUILD_USDVIEW on )
-else()
-    set( PXR_ENABLE_PYTHON_SUPPORT off )
-    set( PXR_BUILD_USDVIEW off )
-endif()
-set( PXR_BUILD_TESTS off )
+add_definitions(${CONAN_DEFINES})
 
 # tweak compile options
 if( UNIX ) 
-    add_compile_options( ${CONAN_DEFINES} )
     add_compile_options( -DUSD_FORCE_GNU_STL_EXTENSIONS )
     # there are too much warnings, disable them completely to not flood the console output
     add_compile_options(-Wno-everything -Wno-inconsistent-missing-override -Wno-potentially-evaluated-exp -Wno-shadow -Wno-shadow-field -Wno-shadow-uncaptured-local -Wno-unused-private-field -Wno-expansion-to-defined -Wno-unneeded-internal-declaration -Wno-unused-variable )
