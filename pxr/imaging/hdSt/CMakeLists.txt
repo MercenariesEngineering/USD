@@ -102,6 +102,7 @@ pxr_library(hdSt
         lightingShader
         material
         materialNetwork
+        materialNetworkShader
         mesh
         package
         points
@@ -158,7 +159,6 @@ pxr_library(hdSt
         fieldTextureCpuData
         imageShaderShaderKey
         indirectDrawBatch
-        materialNetworkShader
         materialBindingResolvingSceneIndexPlugin
         materialPrimvarTransferSceneIndexPlugin
         materialParam
