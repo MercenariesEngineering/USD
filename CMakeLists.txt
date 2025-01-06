@@ -30,24 +30,16 @@ if( DEFINED HDF5_ROOT )
 endif()
 
 if( UNIX )
-    if (NOT DEFINED OIIO_LOCATION)
-        set( OIIO_LOCATION "${CONAN_OPENIMAGEIO_ROOT}" )
-    endif ()
-
     set( OPENGL_gl_LIBRARY "${CONAN_LIB_DIRS_GLU}/libGLU.a" )
     include_directories( "${CONAN_INCLUDE_DIRS_GLU}" )
 else()
-    if( NOT DEFINED CONAN_LIB_DIRS_GLEW )
-        set( CONAN_LIB_DIRS_GLEW ${CONAN_LIB_DIRS_GLEW_RELEASE} )
-    endif()
     if( NOT DEFINED CONAN_DEFINES )
         set( CONAN_DEFINES ${CONAN_DEFINES_RELEASE} )
     endif()
-
-    if (NOT DEFINED OIIO_LOCATION)
-        set( OIIO_LOCATION "${CONAN_OPENIMAGEIO_ROOT_RELEASE}" )
-    endif ()
-
+    
+    if( NOT DEFINED CONAN_LIB_DIRS_GLEW )
+        set( CONAN_LIB_DIRS_GLEW ${CONAN_LIB_DIRS_GLEW_RELEASE} )
+    endif()
     set( GLEW_LIBRARY "${CONAN_LIB_DIRS_GLEW}/glew32.lib" )
 endif()
 add_definitions(${CONAN_DEFINES})
