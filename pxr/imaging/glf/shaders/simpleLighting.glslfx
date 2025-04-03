@@ -442,9 +442,9 @@ integrateLightsDefault(vec4 Peye, vec3 Neye, LightingInterfaceProperties props)
             result.ambient += light.ambient.rgb;
             result.diffuse += indirectLight.diffuse * light.diffuse.rgb;
             result.specular += indirectLight.specular * light.specular.rgb;
+#endif
         } else {
             //cosine of incident angle of light
-#endif
             float NdotL = max(0.0, dot(n, l));
             
             //cosine of incident angle from halfway vector between the eye and the light
