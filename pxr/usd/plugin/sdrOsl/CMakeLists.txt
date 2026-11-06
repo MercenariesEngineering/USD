@@ -11,6 +11,9 @@ if (Imath_FOUND)
 else()
     set(__OSL_IMATH_INCLUDE ${OPENEXR_INCLUDE_DIRS})
     set(__OSL_IMATH_LIBS ${OPENEXR_LIBRARIES})
+    LIST(APPEND __OSL_IMATH_LIBS OpenEXR::IlmImfConfig)
+    LIST(APPEND __OSL_IMATH_LIBS OpenEXR::IlmImf)
+    LIST(APPEND __OSL_IMATH_LIBS OpenEXR::IlmImfUtil)
 endif()
 
 pxr_plugin(sdrOsl

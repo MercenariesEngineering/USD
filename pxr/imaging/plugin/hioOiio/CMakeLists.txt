@@ -13,6 +13,9 @@ if (Imath_FOUND)
 else()
     set(__OIIO_IMATH_INCLUDE ${OPENEXR_INCLUDE_DIRS})
     set(__OIIO_IMATH_LIBS ${OPENEXR_LIBRARIES})
+    LIST(APPEND __OIIO_IMATH_LIBS OpenEXR::IlmImfConfig)
+    LIST(APPEND __OIIO_IMATH_LIBS OpenEXR::IlmImf)
+    LIST(APPEND __OIIO_IMATH_LIBS OpenEXR::IlmImfUtil)
 endif()
 
 pxr_plugin(hioOiio

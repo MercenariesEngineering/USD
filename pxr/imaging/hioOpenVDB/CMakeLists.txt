@@ -18,6 +18,9 @@ if (Imath_FOUND)
     LIST(APPEND __VDB_IMATH_LIBS "Imath::Imath")
 else()
     LIST(APPEND __VDB_IMATH_LIBS ${OPENEXR_Half_LIBRARY})
+    LIST(APPEND __VDB_IMATH_LIBS OpenEXR::IlmImfConfig)
+    LIST(APPEND __VDB_IMATH_LIBS OpenEXR::IlmImf)
+    LIST(APPEND __VDB_IMATH_LIBS OpenEXR::IlmImfUtil)
 endif()
 
 pxr_library(hioOpenVDB
